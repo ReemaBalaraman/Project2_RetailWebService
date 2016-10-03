@@ -1,10 +1,18 @@
-package com;
+package dao;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 
 import model.Product;
 
@@ -18,7 +26,37 @@ public class DBconnection {
 
 	public Product searchProduct(int productID)
 	{
-		Product product = new Product();
+		// loads configuration and creates a session factory
+		try
+		{
+	    Configuration configuration = new Configuration().configure();
+	   configuration.configure("hibernate.cfg.xml");
+			 configuration.addAnnotatedClass(Product.class);
+	    ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+	    SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+	    System.out.println("Hibernate Configuration loaded");
+	    
+	    
+		// opens a new session from the session factory
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    
+	    Product product = (Product) session.load(Product.class, new Integer(productID));
+	    session.close();
+	    return product ;
+	   
+		}
+		catch (Throwable ex) {
+            // Make sure you log the exception, as it might be swallowed
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+	}
+
+	
+	public Product searchProduct1(int productID)
+	{
+		Product product = new Product(5,"Chain",50.0);
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);

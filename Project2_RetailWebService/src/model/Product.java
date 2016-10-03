@@ -1,16 +1,36 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Proxy;
+
+@Entity
+@Table(name="product", 
+uniqueConstraints={ @UniqueConstraint(columnNames={"productID"})})
+@Proxy(lazy=false)
 public class Product {
+	@Id
 	private int productID;
+	@Column(name="ProductDescription", length=25, nullable=true)
 	private String productDescription;
+	@Column(name="UnitPrice")
 	private double unitPrice;
-	
-	/*public Product(int productID, String productDescription, double unitPrice, Customer customer) {
+
+	public Product()
+	{
+
+	}
+	public Product(int productID, String productDescription, double unitPrice) {
 		super();
 		this.productID = productID;
 		this.productDescription = productDescription;
 		this.unitPrice = unitPrice;
-	}*/
+	}
+
 	public int getProductID() {
 		return productID;
 	}
@@ -36,7 +56,7 @@ public class Product {
 	}
 
 
-	
-	
+
+
 
 }
