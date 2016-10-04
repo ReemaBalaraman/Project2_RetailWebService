@@ -18,6 +18,10 @@
 		
 		<!-- Mapping with model class containing annotations -->
 		<mapping class="model.Product"/>
+		<mapping class="model.Partners"/>
+		<mapping class="model.ManageOrder"/>
+		<mapping class="model.Customer"/>
+		<mapping class="model.ProductOrder"/>
 	</session-factory>
 </hibernate-configuration>
  
