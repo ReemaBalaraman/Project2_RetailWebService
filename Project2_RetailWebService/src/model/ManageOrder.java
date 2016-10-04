@@ -23,6 +23,7 @@ public class ManageOrder {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="orderID", nullable=false, unique=true, length=11)
 	private int orderID;
+	
 	@ManyToOne
 	private Customer customer;
 	private String orderStatus;
