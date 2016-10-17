@@ -1,6 +1,5 @@
-package model;
+package model.customer;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,8 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+
+
+import model.order.Order;
 
 import org.hibernate.annotations.Proxy;
 
@@ -20,18 +24,19 @@ uniqueConstraints={ @UniqueConstraint(columnNames={"customerID"}),@UniqueConstra
 @Proxy(lazy=false)
 public class Customer {
 	@Id
+	@Column(name="customerID")
 	private int customerID;
 	@Column(name="customerName", length=25, nullable=true)
 	private String customerName;
-	@Column(name="customerAddress", length=25, nullable=true)
-	private String customerAddress;
-	@Column(name="customerPhone")
-	private String customerPhone;
+	@OneToOne(cascade = CascadeType.ALL)
+	private CustomerAddress customerAddress;
+	@OneToOne(cascade = CascadeType.ALL)
+	private CustomerPhone customerPhone;
 	@Column(name="email")
 	private String email;
 	@OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="customerID")
-    private Set<ManageOrder> order;
+    private Set<Order> order;
 	
     public Customer()
     {
@@ -40,7 +45,7 @@ public class Customer {
 	
 
 	public Customer(int customerID, String customerName,
-			String customerAddress, String customerPhone, String email) {
+			CustomerAddress customerAddress, CustomerPhone customerPhone, String email) {
 		super();
 		this.customerID = customerID;
 		this.customerName = customerName;
@@ -59,17 +64,17 @@ public class Customer {
 		this.customerName = customerName;
 	}
 
-	public void setCustomerAddress(String customerAddress) {
+	public void setCustomerAddress(CustomerAddress customerAddress) {
 		this.customerAddress = customerAddress;
 	}
 
 
-	public void setCustomerPhone(String customerPhone) {
+	public void setCustomerPhone(CustomerPhone customerPhone) {
 		this.customerPhone = customerPhone;
 	}
 
 
-	public void setOrder(Set<ManageOrder> order) {
+	public void setOrder(Set<Order> order) {
 		this.order = order;
 	}
 
@@ -83,15 +88,15 @@ public class Customer {
 		return customerID;
 	}
 
-	public String getCustomerAddress() {
+	public CustomerAddress getCustomerAddress() {
 		return customerAddress;
 	}
 
-	public String getCustomerPhone() {
+	public CustomerPhone getCustomerPhone() {
 		return customerPhone;
 	}
 
-	public Set<ManageOrder> getOrder() {
+	public Set<Order> getOrder() {
 		return order;
 	}
 	

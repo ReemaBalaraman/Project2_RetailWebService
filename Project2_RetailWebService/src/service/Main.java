@@ -6,20 +6,22 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.PaymentDetails;
-import model.Product;
+import dao.ProductDAO;
+
+import model.paymentdetails.PaymentDetails;
+import model.paymentdetails.PaymentDetailsManger;
+import model.product.Product;
+
+
 
 
 
 public class Main {
-	Functionalities functions = new Functionalities();
 	public static void main(String []args){
-		Functionalities functions1 = new Functionalities();
 		Main main = new Main();
-		//main.productSearch();
-		//main.paymentDetailsCheck();
-		Map<Product, Integer> productEligible = new HashMap<>();
-		functions1.orderPlacement(productEligible,"",0.0);
+		main.productSearch();
+		main.paymentDetailsCheck();
+
 		
 		
 	}
@@ -28,7 +30,8 @@ public class Main {
 
 	// 1. Product Search Function call
 	private void productSearch(){
-	Product product = functions.serachProduct(1);
+	ProductDAO prodDAO = new ProductDAO();
+	Product product = prodDAO.searchProduct(1);
 	System.out.println("Product search result :" + " " 
 	+"Product Description - "+product.getProductDescription()+" "+"unit Price - "+  product.getUnitPrice());
 	}
@@ -47,8 +50,9 @@ public class Main {
         e.printStackTrace();
     }
 
-	PaymentDetails pd = new PaymentDetails(1234567812345678L,889,"Reema",date1);	
-	functions.paymentDetailsCheck(pd, 20.05);
+	PaymentDetails pd = new PaymentDetails(1234567812345678L,889,"Reema",date1);
+	PaymentDetailsManger pdm = new PaymentDetailsManger();
+	pdm.paymentDetailsCheck(pd, 20.05);
 	
 	}
 }
