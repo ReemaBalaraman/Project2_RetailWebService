@@ -10,12 +10,13 @@ import dao.CustomerDAO;
 
 public class CustomerManager {
 	
-	/* Fetch All Customer */
+	CustomerDAO custDAO = new CustomerDAO();
 	
+	/* Fetch All Customer */
 	public Set<Customer> getAllCustomers()
 	{
 		Set<Customer> customers = new HashSet<Customer>();
-		//call DAO here
+		customers = custDAO.fetchAllCustomers();
 		return customers;
 	}
 	
@@ -24,22 +25,23 @@ public class CustomerManager {
 	public Customer getCustomers(String id)
 	{
 		Customer customer = new Customer();
-		//call DAO here
+		//call DAO 
+		customer = custDAO.fetchCustomer(id);
 		return customer;
 	}
 	
 	/* Adds/Registers Customer */
-	public Customer addCustomer(String name, String email, CustomerPhone phone, CustomerAddress address){
-		CustomerDAO custDAO = new CustomerDAO();
+	public String addCustomer(String name, String email, CustomerPhone phone, CustomerAddress address){
+		
 		Customer customer = new Customer();
         customer.setCustomerName(name);
         customer.setCustomerAddress(address);
        
         customer.setEmail(email);
         customer.setCustomerPhone(phone);
-        custDAO.addCustomer(customer);
+        String status = custDAO.addCustomer(customer);
 	
-        return customer;
+        return status;
 		
 	}
 

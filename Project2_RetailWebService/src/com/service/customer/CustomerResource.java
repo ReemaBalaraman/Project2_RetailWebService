@@ -1,4 +1,4 @@
-package com.service;
+package com.service.customer;
 
 
 import java.util.Set;
@@ -13,9 +13,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.CacheControl;
 
-import com.service.representation.CustomerRepresentation;
-import com.service.representation.CustomerRequest;
-import com.service.workflow.CustomerActivity;
+import com.service.representation.customer.CustomerRepresentation;
+import com.service.representation.customer.CustomerRequest;
+import com.service.workflow.customer.CustomerActivity;
 
 @Path("/customerservice/")
 public class CustomerResource implements CustomerService {
@@ -32,26 +32,26 @@ public class CustomerResource implements CustomerService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/employee/{employeeId}")
-	public CustomerRepresentation getCustomer(@PathParam("employeeId") String id) {
-		System.out.println("GET METHOD Request from Client with custRequest String ............." + id);
+	@Path("/customer/{customerId}")
+	public CustomerRepresentation getCustomer(@PathParam("customerId") String id) {
+		System.out.println("GET METHOD Request from Client with customerId String ............." + id);
 		CustomerActivity custActivity = new CustomerActivity();
 		return custActivity.getCustomer(id);
 	}
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/employee")
-	public CustomerRepresentation addCustomer(CustomerRequest  customerRequest) {
+	@Path("/customer")
+	public String addCustomer(CustomerRequest  customerRequest) {
 		//System.out.println("POST METHOD Request from Client with ............." + employeeRequest.getFirstName() + "  " + employeeRequest.getLastName());
 		CustomerActivity custActivity = new CustomerActivity();
 		return custActivity.addCustomer(customerRequest.getCustomerName(),customerRequest.getEmail(),customerRequest.getCustomerPhone(),customerRequest.getCustomerAddress());
 	}
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/employee/{employeeId}")
-	public Response deleteCustomer(@PathParam("employeeId") String id) {
-		System.out.println("Delete METHOD Request from Client with employeeRequest String ............." + id);
+	@Path("/customer/{customerId}")
+	public Response deleteCustomer(@PathParam("customerId") String id) {
+		System.out.println("Delete METHOD Request from Client with customerId String ............." + id);
 		CustomerActivity custActivity = new CustomerActivity();
 		String res = custActivity.deleteCustomer(id);
 		if (res.equals("OK")) {

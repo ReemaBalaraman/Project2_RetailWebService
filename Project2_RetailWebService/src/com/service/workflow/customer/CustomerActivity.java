@@ -1,4 +1,4 @@
-package com.service.workflow;
+package com.service.workflow.customer;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -9,7 +9,7 @@ import model.customer.CustomerAddress;
 import model.customer.CustomerManager;
 import model.customer.CustomerPhone;
 
-import com.service.representation.CustomerRepresentation;
+import com.service.representation.customer.CustomerRepresentation;
 
 /**
  * This class' responsibility is to manage the workflow of accessing/creating/updating/deleting resources
@@ -61,20 +61,20 @@ public class CustomerActivity {
 		return custRep;
 	}
 	
-	public CustomerRepresentation addCustomer(String name, String email, CustomerPhone phone, CustomerAddress address) {
+	public String addCustomer(String name, String email, CustomerPhone phone, CustomerAddress address) {
 		
 		//Employee emp = dao.addEmployee(firstName, lastName);
-		Customer cust = cm.addCustomer(name, email, phone, address);
+		String status = cm.addCustomer(name, email, phone, address);
 		
-		CustomerRepresentation custRep = new CustomerRepresentation();
+		/*CustomerRepresentation custRep = new CustomerRepresentation();
 
 		custRep.setCustomerID(cust.getCustomerID());
 		custRep.setCustomerName(cust.getCustomerName());
 		custRep.setEmail(cust.getEmail());
 		custRep.setCustomerAddress(cust.getCustomerAddress());
-		custRep.setCustomerPhone(cust.getCustomerPhone());
+		custRep.setCustomerPhone(cust.getCustomerPhone());*/
 		
-		return custRep;
+		return status;
 	}
 	
 	public String deleteCustomer(String id) {

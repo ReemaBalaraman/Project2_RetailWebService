@@ -29,15 +29,15 @@ public class Order {
 	
 	@ManyToOne
 	private Customer customer;
+	
 	private String orderStatus;
 	private Date orderDate;
-
-	private double totalPrice;
+    private double totalPrice;
+    
 	@OneToMany(mappedBy = "product")
 	private Set<ProductOrder> productOrder;
 	
-	Customer cutsomer = new Customer();
-	
+
 	public Order()
 	{
 		

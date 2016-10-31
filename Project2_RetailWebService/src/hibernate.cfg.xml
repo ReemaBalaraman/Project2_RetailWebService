@@ -12,16 +12,18 @@
 		<property name="connection.password">root123</property>
 
 		<property name="show_sql">true</property>
-		
+				<property name="hibernate.id.new_generator_mappings">false</property>
 		<!-- org.hibernate.HibernateException: No CurrentSessionContext configured! -->
 		<property name="hibernate.current_session_context_class">thread</property>
-		
+
 		<!-- Mapping with model class containing annotations -->
-		<mapping class="model.Product"/>
-		<mapping class="model.Partners"/>
-		<mapping class="model.ManageOrder"/>
-		<mapping class="model.Customer"/>
-		<mapping class="model.ProductOrder"/>
+		<mapping class="model.product.Product"/>
+		<mapping class="model.partners.Partners"/>
+		<mapping class="model.order.Order"/>
+		<mapping class="model.customer.Customer"/>
+		<mapping class="model.customer.CustomerAddress"/>
+		<mapping class="model.customer.CustomerPhone"/>
+		<mapping class="model.order.ProductOrder"/>
 	</session-factory>
 </hibernate-configuration>
  

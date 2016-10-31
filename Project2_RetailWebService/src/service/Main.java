@@ -5,9 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
+import com.service.representation.customer.CustomerRepresentation;
+import com.service.workflow.customer.CustomerActivity;
 
 import dao.ProductDAO;
 
+import model.customer.CustomerAddress;
+import model.customer.CustomerPhone;
 import model.paymentdetails.PaymentDetails;
 import model.paymentdetails.PaymentDetailsManger;
 import model.product.Product;
@@ -19,9 +25,10 @@ import model.product.Product;
 public class Main {
 	public static void main(String []args){
 		Main main = new Main();
-		main.productSearch();
-		main.paymentDetailsCheck();
-
+		//main.productSearch();
+		//main.paymentDetailsCheck();
+		//main.addCustomer();
+       main.fetchCustomer();
 		
 		
 	}
@@ -31,7 +38,7 @@ public class Main {
 	// 1. Product Search Function call
 	private void productSearch(){
 	ProductDAO prodDAO = new ProductDAO();
-	Product product = prodDAO.searchProduct(1);
+	Product product = prodDAO.searchProduct("1");
 	System.out.println("Product search result :" + " " 
 	+"Product Description - "+product.getProductDescription()+" "+"unit Price - "+  product.getUnitPrice());
 	}
@@ -55,4 +62,25 @@ public class Main {
 	pdm.paymentDetailsCheck(pd, 20.05);
 	
 	}
+	
+	//add Customer
+public void addCustomer(){
+	CustomerActivity ca = new CustomerActivity();
+	String name = "TestCust";
+	String email = "test1@gmail.com";
+	CustomerAddress address = new CustomerAddress("testArea","testCity","testState","60660");
+	CustomerPhone phone = new CustomerPhone("1234567","7654321");
+	System.out.println(ca.addCustomer(name, email, phone, address));
+}
+public void fetchCustomer()
+{
+	CustomerActivity ca = new CustomerActivity();
+	//CustomerRepresentation cr = ca.getCustomer("test1@gmail.com");
+	Set<CustomerRepresentation> setCR = ca.getCustomer();
+	for(CustomerRepresentation cr : setCR)
+	{
+	System.out.println(cr.getCustomerID() + " "+ cr.getEmail())	;
+	}
+}
+
 }

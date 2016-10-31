@@ -2,17 +2,24 @@ package model.customer;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CUSTADDRESS")
+@Table(name = "CUSTADDRESS1")
 public class CustomerAddress {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "AID")
 	private long addressId;
+	@Column(name = "ADDRESS_STREET", nullable = false, length=250)
 	private String street;
+	@Column(name = "ADDRESS_CITY", nullable = false, length=50)
 	private String city;
+	@Column(name = "ADDRESS_STATE", nullable = false, length=50)
 	private String state;
+	@Column(name = "ADDRESS_ZIPCODE", nullable = false, length=10)
 	private String zipcode;
 
 	public CustomerAddress() {
@@ -25,9 +32,7 @@ public class CustomerAddress {
 		this.zipcode = zipcode;
 	}
 
-	@Id
-	@GeneratedValue
-	@Column(name = "ADDRESS_ID")
+
 	public long getAddressId() {
 		return this.addressId;
 	}
@@ -36,7 +41,7 @@ public class CustomerAddress {
 		this.addressId = addressId;
 	}
 	
-	@Column(name = "ADDRESS_STREET", nullable = false, length=250)
+	
 	public String getStreet() {
 		return this.street;
 	}
@@ -45,7 +50,7 @@ public class CustomerAddress {
 		this.street = street;
 	}
 
-	@Column(name = "ADDRESS_CITY", nullable = false, length=50)
+	
 	public String getCity() {
 		return this.city;
 	}
@@ -54,7 +59,7 @@ public class CustomerAddress {
 		this.city = city;
 	}
 
-	@Column(name = "ADDRESS_STATE", nullable = false, length=50)
+	
 	public String getState() {
 		return this.state;
 	}
@@ -63,7 +68,7 @@ public class CustomerAddress {
 		this.state = state;
 	}
 
-	@Column(name = "ADDRESS_ZIPCODE", nullable = false, length=10)
+	
 	public String getZipcode() {
 		return this.zipcode;
 	}

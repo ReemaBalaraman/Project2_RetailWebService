@@ -3,6 +3,7 @@ package model.customer;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,8 +12,8 @@ import javax.persistence.Table;
 public class CustomerPhone {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "PHONE_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PID")
 	private long phoneID;
 	@Column(name = "PRIMARY_NUMBER", nullable = false, length=20)
 	private String primaryNumber;

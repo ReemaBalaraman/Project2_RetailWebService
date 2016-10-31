@@ -5,6 +5,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -24,7 +26,8 @@ uniqueConstraints={ @UniqueConstraint(columnNames={"customerID"}),@UniqueConstra
 @Proxy(lazy=false)
 public class Customer {
 	@Id
-	@Column(name="customerID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="CustomerID")
 	private int customerID;
 	@Column(name="customerName", length=25, nullable=true)
 	private String customerName;

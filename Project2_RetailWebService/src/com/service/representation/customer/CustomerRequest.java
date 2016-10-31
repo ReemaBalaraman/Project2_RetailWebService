@@ -1,4 +1,4 @@
-package com.service.representation;
+package com.service.representation.customer;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,10 +8,10 @@ import javax.xml.bind.annotation.XmlType;
 import model.customer.CustomerAddress;
 import model.customer.CustomerPhone;
 
-@XmlRootElement(name = "Customer")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class CustomerRepresentation {
+public class CustomerRequest {
 	
 	private int customerID;
 	private String customerName;
@@ -49,4 +49,5 @@ public class CustomerRepresentation {
 		this.email = email;
 	}
 
+	
 }
