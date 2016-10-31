@@ -13,9 +13,20 @@ import model.product.Product;
 @XmlType(name = "")
 public class PartnerRequest {
 	
+	private String id;
 	private String partnerType;
 	private String partnerName;
 	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getPartnerType() {
+		return partnerType;
+	}
 	public String getPartnerName() {
 		return partnerName;
 	}
