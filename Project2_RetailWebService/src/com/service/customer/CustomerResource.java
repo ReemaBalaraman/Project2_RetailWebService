@@ -3,6 +3,7 @@ package com.service.customer;
 
 import java.util.Set;
 
+import javax.jws.WebService;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,6 +18,7 @@ import com.service.representation.customer.CustomerRepresentation;
 import com.service.representation.customer.CustomerRequest;
 import com.service.workflow.customer.CustomerActivity;
 
+@WebService(targetNamespace = "http://customer.service.com/", endpointInterface = "com.service.customer.CustomerService", portName = "CustomerResourcePort", serviceName = "CustomerResourceService")
 @Path("/customerservice/")
 public class CustomerResource implements CustomerService {
 

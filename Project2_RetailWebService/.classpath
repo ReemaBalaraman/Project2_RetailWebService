@@ -20,6 +20,11 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Applications/HRServicesRS/build/classes/jackson-all-1.9.4.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.ws.cxf.core.CXF_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Applications/Reema433Project_WS/jackson-all-1.9.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

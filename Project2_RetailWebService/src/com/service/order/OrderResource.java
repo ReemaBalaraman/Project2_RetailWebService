@@ -2,6 +2,7 @@ package com.service.order;
 
 import java.util.Set;
 
+import javax.jws.WebService;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,6 +17,7 @@ import com.service.representation.order.OrderRepresentation;
 import com.service.representation.order.OrderRequest;
 import com.service.workflow.order.OrderActivity;
 
+@WebService(targetNamespace = "http://order.service.com/", endpointInterface = "com.service.order.OrderService", portName = "OrderResourcePort", serviceName = "OrderResourceService")
 @Path("/orderservice/")
 public class OrderResource implements OrderService {
 

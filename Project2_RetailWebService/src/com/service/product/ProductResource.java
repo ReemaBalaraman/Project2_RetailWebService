@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
+import javax.jws.WebService;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,6 +19,7 @@ import com.service.representation.product.ProductRepresentation;
 import com.service.representation.product.ProductRequest;
 import com.service.workflow.product.ProductActivity;
 
+@WebService(targetNamespace = "http://product.service.com/", endpointInterface = "com.service.product.ProductService", portName = "ProductResourcePort", serviceName = "ProductResourceService")
 @Path("/productservice/")
 public class ProductResource implements ProductService {
 

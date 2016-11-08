@@ -2,6 +2,7 @@ package com.service.partner;
 
 import java.util.Set;
 
+import javax.jws.WebService;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,6 +18,7 @@ import com.service.representation.partner.PartnerRepresentation;
 import com.service.representation.partner.PartnerRequest;
 import com.service.workflow.partner.PartnerActivity;
 
+@WebService(targetNamespace = "http://partner.service.com/", endpointInterface = "com.service.partner.PartnerService", portName = "PartnerResourcePort", serviceName = "PartnerResourceService")
 @Path("/customerservice/")
 public class PartnerResource implements PartnerService {
 
