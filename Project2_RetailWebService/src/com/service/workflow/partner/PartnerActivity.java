@@ -36,7 +36,7 @@ public class PartnerActivity {
           partnerRepresentation.setPartnerID(part.getPartnerID());
           partnerRepresentation.setPartnerType(part.getPartnerType());
           partnerRepresentation.setPartnerName(part.getPartnerName());
-          partnerRepresentation.setProduct(part.getProduct());
+          //partnerRepresentation.setProduct(part.getProduct());
            
           
           //now add this representation in the list
@@ -55,7 +55,7 @@ public class PartnerActivity {
 		partRep.setPartnerID(part.getPartnerID());
 		partRep.setPartnerType(part.getPartnerType());
 		partRep.setPartnerName(part.getPartnerName());
-		partRep.setProduct(part.getProduct());
+		//partRep.setProduct(part.getProduct());
 		
 		return partRep;
 	}
@@ -71,7 +71,7 @@ public class PartnerActivity {
 		partRep.setPartnerID(part.getPartnerID());
 		partRep.setPartnerType(part.getPartnerType());
 		partRep.setPartnerName(part.getPartnerName());
-		partRep.setProduct(part.getProduct());
+		//partRep.setProduct(part.getProduct());
 		
 		return partRep;
 	}

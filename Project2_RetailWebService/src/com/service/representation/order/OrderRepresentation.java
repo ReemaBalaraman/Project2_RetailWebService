@@ -12,7 +12,7 @@ import model.customer.Customer;
 import model.order.ProductOrder;
 
 
-@XmlRootElement
+@XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class OrderRepresentation {

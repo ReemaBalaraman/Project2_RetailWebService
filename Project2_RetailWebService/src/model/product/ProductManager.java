@@ -35,10 +35,11 @@ public class ProductManager {
 	}
 	
 	 /* Adding Products to Database*/
-	public String addProduct(String productDescription, double unitPrice, int availableQuantity)
+	public String addProduct(int productID,String productDescription, double unitPrice, int availableQuantity)
 	{
 	
 		Product product = new Product();
+		product.setProductID(productID);
 		product.setAvailableQuantity(availableQuantity);
 		product.setProductDescription(productDescription);
 		product.setUnitPrice(unitPrice);

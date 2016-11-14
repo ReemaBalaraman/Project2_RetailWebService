@@ -10,6 +10,7 @@ import model.customer.CustomerAddress;
 import model.customer.CustomerPhone;
 import model.order.Order;
 import model.order.ProductOrder;
+import model.partner.Partners;
 import model.product.Product;
 
 import org.hibernate.Query;
@@ -32,6 +33,7 @@ public class CustomerDAO {
 		configuration.addAnnotatedClass(Order.class);
 		configuration.addAnnotatedClass(ProductOrder.class);
 		configuration.addAnnotatedClass(Product.class);
+		configuration.addAnnotatedClass(Partners.class);
 		
 	}
 	public String addCustomer(Customer customer){

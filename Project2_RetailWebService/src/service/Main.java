@@ -25,10 +25,10 @@ import model.product.Product;
 public class Main {
 	public static void main(String []args){
 		Main main = new Main();
-		//main.productSearch();
+		main.productSearch();
 		//main.paymentDetailsCheck();
 		//main.addCustomer();
-       main.fetchCustomer();
+       //main.fetchCustomer();
 		
 		
 	}
@@ -37,6 +37,7 @@ public class Main {
 
 	// 1. Product Search Function call
 	private void productSearch(){
+		System.out.println("Product search start :" + " ");
 	ProductDAO prodDAO = new ProductDAO();
 	Product product = prodDAO.searchProduct("1");
 	System.out.println("Product search result :" + " " 

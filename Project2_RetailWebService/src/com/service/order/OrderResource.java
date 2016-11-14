@@ -34,7 +34,7 @@ public class OrderResource implements OrderService {
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderId}")
-	public OrderRepresentation getOrder(@PathParam("employeeId") String id) {
+	public OrderRepresentation getOrder(@PathParam("orderId") String id) {
 		System.out.println("GET METHOD Request from Client with orderID String ............." + id);
 		OrderActivity ordActivity = new OrderActivity();
 		return ordActivity.getOrder(id);
@@ -51,7 +51,7 @@ public class OrderResource implements OrderService {
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderId}")
-	public Response deleteOrder(@PathParam("employeeId") String id) {
+	public Response deleteOrder(@PathParam("orderId") String id) {
 		System.out.println("Delete METHOD Request from Client with orderID String ............." + id);
 		OrderActivity ordActivity = new OrderActivity();
 		String res = ordActivity.deleteOrder(id);

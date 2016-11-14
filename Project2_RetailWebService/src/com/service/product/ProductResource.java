@@ -19,7 +19,7 @@ import com.service.representation.product.ProductRepresentation;
 import com.service.representation.product.ProductRequest;
 import com.service.workflow.product.ProductActivity;
 
-@WebService(targetNamespace = "http://product.service.com/", endpointInterface = "com.service.product.ProductService", portName = "ProductResourcePort", serviceName = "ProductResourceService")
+
 @Path("/productservice/")
 public class ProductResource implements ProductService {
 
@@ -46,9 +46,9 @@ public class ProductResource implements ProductService {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/product")
 	public String addProduct(ProductRequest  productRequest) {
-		//System.out.println("POST METHOD Request from Client with ............." + employeeRequest.getFirstName() + "  " + employeeRequest.getLastName());
+		System.out.println("POST METHOD Request from Client with .............Produst detauls" );
 		ProductActivity proActivity = new ProductActivity();
-		return proActivity.addProduct(productRequest.getProductDescription(),productRequest.getUnitPrice(),productRequest.getAvailableQuantity());
+		return proActivity.addProduct(productRequest.getProductID(),productRequest.getProductDescription(),productRequest.getUnitPrice(),productRequest.getAvailableQuantity());
 	}
 	@DELETE
 	@Produces({"application/xml" , "application/json"})

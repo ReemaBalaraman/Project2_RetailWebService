@@ -22,7 +22,7 @@ import model.order.ProductOrder;
  */
 public class ProductActivity {
 
-	private static ProductManager pm = new ProductManager();
+	private  ProductManager pm = new ProductManager();
 
 	public Set<ProductRepresentation> getProduct() {
 
@@ -39,8 +39,8 @@ public class ProductActivity {
 			prodRepresentation.setProductDescription(prod.getProductDescription());
 			prodRepresentation.setUnitPrice(prod.getUnitPrice());
 			prodRepresentation.setAvailableQuantity(prod.getAvailableQuantity());
-			prodRepresentation.setProductOrder(prod.getProductOrder());
-			prodRepresentation.setProductOrder(prod.getProductOrder());
+			//prodRepresentation.setProductOrder(prod.getProductOrder());
+			//prodRepresentation.setProductOrder(prod.getProductOrder());
 
 			//now add this representation in the list
 			prodRepresentations.add(prodRepresentation);
@@ -59,25 +59,15 @@ public class ProductActivity {
 		prdRep.setProductDescription(prod.getProductDescription());
 		prdRep.setUnitPrice(prod.getUnitPrice());
 		prdRep.setAvailableQuantity(prod.getAvailableQuantity());
-		prdRep.setProductOrder(prod.getProductOrder());
-		prdRep.setProductOrder(prod.getProductOrder());
+
 
 		return prdRep;
 	}
 
-	public String addProduct(String productDescription, double unitPrice, int availableQuantity) {
+	public String addProduct(int productID,String productDescription, double unitPrice, int availableQuantity) {
 
 		//Employee emp = dao.addEmployee(firstName, lastName);
-		String status = pm.addProduct(productDescription, unitPrice, availableQuantity);
-
-		/*ProductRepresentation prdRep = new ProductRepresentation();
-
-		prdRep.setProductID(prd.getProductID());
-        prdRep.setProductDescription(prd.getProductDescription());
-        prdRep.setUnitPrice(prd.getUnitPrice());
-        prdRep.setAvailableQuantity(prd.getAvailableQuantity());
-        prdRep.setProductOrder(prd.getProductOrder()); */
-
+		String status = pm.addProduct(productID,productDescription, unitPrice, availableQuantity);
 
 		return status;
 	}

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 import model.product.Product;
 
 
-@XmlRootElement
+@XmlRootElement(name = "Partner")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class PartnerRepresentation {

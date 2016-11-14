@@ -10,6 +10,7 @@ import model.customer.CustomerAddress;
 import model.customer.CustomerPhone;
 import model.order.Order;
 import model.order.ProductOrder;
+import model.partner.Partners;
 import model.product.Product;
 
 import org.hibernate.Query;
@@ -32,6 +33,7 @@ public class ProductDAO {
 		configuration.addAnnotatedClass(Order.class);
 		configuration.addAnnotatedClass(ProductOrder.class);
 		configuration.addAnnotatedClass(Product.class);
+		configuration.addAnnotatedClass(Partners.class);
 		
 	}
 	
@@ -75,6 +77,7 @@ public class ProductDAO {
 		// loads configuration and creates a session factory
 		try
 		{
+			dbConnection();
 	    ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 	    SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 	    System.out.println("Hibernate Configuration loaded");
@@ -112,7 +115,7 @@ public class ProductDAO {
 			session.flush(); // stmt.executeBatch()
 			t.commit(); // con.commit();
 			System.out.println("Records inserted");
-			String status = "Product Added" ;
+			String status = "Product Added Successfully" ;
 			return status;
 
 		}catch (Throwable ex) {

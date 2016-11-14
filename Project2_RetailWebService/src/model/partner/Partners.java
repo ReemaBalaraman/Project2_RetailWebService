@@ -2,6 +2,8 @@ package model.partner;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -16,12 +18,13 @@ uniqueConstraints={ @UniqueConstraint(columnNames={"partnerID"})})
 @Proxy(lazy=false)
 public class Partners {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int partnerID;
 	@Column(name="partnerType", length=25, nullable=true)
 	private String partnerType;
 	@Column(name="partnerName", length=25, nullable=true)
 	private String partnerName;
-	private Product product;
+	//private Product product;
 	
 	
 
@@ -37,9 +40,7 @@ public class Partners {
 		this.partnerName = partnerName;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+
 
 	public int getPartnerID() {
 		return partnerID;
@@ -53,9 +54,7 @@ public class Partners {
 		return partnerName;
 	}
 
-	public Product getProduct() {
-		return product;
-	}
+
 	
 	
 

@@ -11,7 +11,7 @@ import model.order.ProductOrder;
 
 
 
-@XmlRootElement(name = "Customer")
+@XmlRootElement(name = "Product")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class ProductRepresentation {

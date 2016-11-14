@@ -33,6 +33,7 @@ public class ManageOrderDAO {
 		configuration.addAnnotatedClass(Order.class);
 		configuration.addAnnotatedClass(ProductOrder.class);
 		configuration.addAnnotatedClass(Product.class);
+		configuration.addAnnotatedClass(Partners.class);
 		
 	}
 	public String placeOrder(Order mo , Set<ProductOrder> productEligible) {
@@ -79,7 +80,7 @@ throw new ExceptionInInitializerError(ex);
 			// opens a new session from the session factory
 			Session session = sessionFactory.openSession();
 			org.hibernate.Transaction t =  session.beginTransaction();
-			String hql = "FROM Order 0 WHERE o.orderID = :identifier";
+			String hql = "FROM Order o WHERE o.orderID = :identifier";
 				Query query = session.createQuery(hql);
 				int idInt = Integer.parseInt(id);
 				query.setParameter("identifier",idInt);

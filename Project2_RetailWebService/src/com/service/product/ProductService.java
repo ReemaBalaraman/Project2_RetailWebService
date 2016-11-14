@@ -14,7 +14,7 @@ public interface ProductService {
 	   
 	public Set<ProductRepresentation> getProduct();
 	public ProductRepresentation getProduct(String employeeId);
-	public String addProduct(ProductRequest employeeRequest);
+	public String addProduct(ProductRequest productRequest);
 	public void buyProduct(String email,Date orderDate,Map<String,Integer> productQuantity);
    
     //public Response updateEmployee(EmployeeRequest employeeRequest);

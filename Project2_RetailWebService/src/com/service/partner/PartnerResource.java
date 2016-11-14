@@ -19,7 +19,7 @@ import com.service.representation.partner.PartnerRequest;
 import com.service.workflow.partner.PartnerActivity;
 
 @WebService(targetNamespace = "http://partner.service.com/", endpointInterface = "com.service.partner.PartnerService", portName = "PartnerResourcePort", serviceName = "PartnerResourceService")
-@Path("/customerservice/")
+@Path("/partnerservice/")
 public class PartnerResource implements PartnerService {
 
 	@GET
