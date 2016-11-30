@@ -66,28 +66,22 @@ public class OrderActivity {
 	}
 	
 	public String addOrder(Date orderDate, double totalPrice, Set<ProductOrder> productOrder,String customerEmail) {
-		
-		//Employee emp = dao.addEmployee(firstName, lastName);
-		String status = om.orderPlacement(orderDate, totalPrice, productOrder, customerEmail);
-		
-		/*OrderRepresentation ordRep = new OrderRepresentation();
 
-		ordRep.setOrderID(ord.getOrderID());
-		ordRep.setOrderDate(ord.getOrderDate());
-		ordRep.setOrderStatus(ord.getOrderStatus());
-		ordRep.setTotalPrice(ord.getTotalPrice());
-		ordRep.setProductOrder(ord.getProductOrder());
-		ordRep.setCustomer(ord.getCustomer());*/
+		String status = om.orderPlacement(orderDate, totalPrice, productOrder, customerEmail);
 		
 		return status;
 	}
 	
-	public String deleteOrder(String id) {
+	public String cancelOrder(String id) {
 		
-		//dao.deleteEmployee(id);
-		//em.deleteEmployee(id);
+		String status = om.cancelOrder(id);
 		
-		return "OK";
+		return status;
 	}
-	
+public String fetchOrderStatus(String id) {
+		
+		String status = om.fetchOrderStatus(id);
+		
+		return status;
+	}
 }

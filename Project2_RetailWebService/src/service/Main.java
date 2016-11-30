@@ -8,7 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.service.representation.customer.CustomerRepresentation;
+import com.service.representation.order.OrderRepresentation;
 import com.service.workflow.customer.CustomerActivity;
+import com.service.workflow.order.OrderActivity;
 
 import dao.ProductDAO;
 
@@ -25,10 +27,14 @@ import model.product.Product;
 public class Main {
 	public static void main(String []args){
 		Main main = new Main();
-		main.productSearch();
+		//main.productSearch();
 		//main.paymentDetailsCheck();
 		//main.addCustomer();
        //main.fetchCustomer();
+		//main.authenticateCustomer();
+		//main.cancelOrder();
+		//main.fetchOrder();
+		main.fetchOrderStatus();
 		
 		
 	}
@@ -69,9 +75,17 @@ public void addCustomer(){
 	CustomerActivity ca = new CustomerActivity();
 	String name = "TestCust";
 	String email = "test1@gmail.com";
+	String password = "test123";
 	CustomerAddress address = new CustomerAddress("testArea","testCity","testState","60660");
 	CustomerPhone phone = new CustomerPhone("1234567","7654321");
-	System.out.println(ca.addCustomer(name, email, phone, address));
+	System.out.println(ca.addCustomer(name, email, password,phone, address));
+}
+
+public void authenticateCustomer(){
+	CustomerActivity ca = new CustomerActivity();
+	String email = "test31@gmail.com";
+	String password = "test123";
+	System.out.println(ca.authenticateCustomer(email, password));
 }
 public void fetchCustomer()
 {
@@ -83,5 +97,21 @@ public void fetchCustomer()
 	System.out.println(cr.getCustomerID() + " "+ cr.getEmail())	;
 	}
 }
-
+public void fetchOrder()
+{
+	OrderActivity ca = new OrderActivity();
+	Set<OrderRepresentation> setCR = ca.getOrder();
+	for(OrderRepresentation cr : setCR)
+	{
+	System.out.println(cr.getOrderStatus())	;
+	}
+}
+public void cancelOrder(){
+	OrderActivity ca = new OrderActivity();
+	System.out.println(ca.cancelOrder("1"));
+}
+public void fetchOrderStatus(){
+	OrderActivity ca = new OrderActivity();
+	System.out.println(ca.fetchOrderStatus("2"));
+}
 }

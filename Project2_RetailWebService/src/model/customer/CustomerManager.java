@@ -31,17 +31,39 @@ public class CustomerManager {
 	}
 	
 	/* Adds/Registers Customer */
-	public String addCustomer(String name, String email, CustomerPhone phone, CustomerAddress address){
+	public String addCustomer(String name, String email,String password, CustomerPhone phone, CustomerAddress address){
 		
 		Customer customer = new Customer();
         customer.setCustomerName(name);
         customer.setCustomerAddress(address);
+        customer.setPassword(password);
        
         customer.setEmail(email);
         customer.setCustomerPhone(phone);
         String status = custDAO.addCustomer(customer);
 	
         return status;
+		
+	}
+	
+	//Authenticate Customer
+	public String authenticateCustomer(String email, String password){
+		
+        Customer customer = custDAO.authenticateCustomer(email);
+
+        if(customer == null)
+        {
+        return "Invalid email.Please provide the details again.";	
+        }
+        else
+        {
+        if(password.equals(customer.getPassword()))
+        {
+        	return "Succefully logged in.";
+        }
+        else
+        	return "Email and Password conbination does not match.Please provide the details again.";
+        }
 		
 	}
 

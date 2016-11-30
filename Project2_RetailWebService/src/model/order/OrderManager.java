@@ -46,4 +46,16 @@ public class OrderManager {
 		return order;
 	}
 	
+	public String cancelOrder(String id)
+	
+	{
+		String status = moDAO.cancelOrder(id);
+		return status;
+	}
+public String fetchOrderStatus(String id)
+	
+	{
+		String status = moDAO.fetchOrderStatus(id);
+		return status;
+	}
 }

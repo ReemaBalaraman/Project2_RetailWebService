@@ -61,10 +61,10 @@ public class CustomerActivity {
 		return custRep;
 	}
 	
-	public String addCustomer(String name, String email, CustomerPhone phone, CustomerAddress address) {
+	public String addCustomer(String name, String email, String password,CustomerPhone phone, CustomerAddress address) {
 		
 		//Employee emp = dao.addEmployee(firstName, lastName);
-		String status = cm.addCustomer(name, email, phone, address);
+		String status = cm.addCustomer(name, email,password, phone, address);
 		
 		/*CustomerRepresentation custRep = new CustomerRepresentation();
 
@@ -73,6 +73,13 @@ public class CustomerActivity {
 		custRep.setEmail(cust.getEmail());
 		custRep.setCustomerAddress(cust.getCustomerAddress());
 		custRep.setCustomerPhone(cust.getCustomerPhone());*/
+		
+		return status;
+	}
+	
+	public String authenticateCustomer(String email, String password) {
+		
+		String status = cm.authenticateCustomer(email,password);
 		
 		return status;
 	}

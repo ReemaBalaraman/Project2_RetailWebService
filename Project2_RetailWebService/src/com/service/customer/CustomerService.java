@@ -12,8 +12,9 @@ import com.service.representation.customer.CustomerRequest;
 public interface CustomerService {
 	   
 	public Set<CustomerRepresentation> getCustomer();
-	public CustomerRepresentation getCustomer(String employeeId);
-	public String addCustomer(CustomerRequest employeeRequest);
+	public CustomerRepresentation getCustomer(String custId);
+	public String addCustomer(CustomerRequest customerRequest);
+	public String authenticateCustomer(CustomerRequest customerRequest);
    
     //public Response updateEmployee(EmployeeRequest employeeRequest);
     //public Response deleteEmployee(String employeeId);

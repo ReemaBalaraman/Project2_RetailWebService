@@ -18,6 +18,7 @@ public class CustomerRequest {
 	private CustomerAddress customerAddress;
 	private CustomerPhone customerPhone;
 	private String email;
+	private String password;
 	public int getCustomerID() {
 		return customerID;
 	}
@@ -47,6 +48,12 @@ public class CustomerRequest {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	

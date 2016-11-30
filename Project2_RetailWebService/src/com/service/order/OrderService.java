@@ -12,8 +12,10 @@ import com.service.representation.customer.CustomerRequest;
 public interface OrderService {
 	   
 	public Set<OrderRepresentation> getOrder();
-	public OrderRepresentation getOrder(String employeeId);
+	public OrderRepresentation getOrder(String orderId);
 	public String addOrder(OrderRequest orderRequest);
+	public String cancelOrder(String orderId);
+	public String fetchOrderStatus(String orderId);
    
     //public Response updateEmployee(EmployeeRequest employeeRequest);
     //public Response deleteEmployee(String employeeId);

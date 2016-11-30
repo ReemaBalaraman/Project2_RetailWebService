@@ -61,7 +61,43 @@ public class CustomerDAO {
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
+	
+	public Customer authenticateCustomer(String email){
+		try
+		{
+			dbConnection();
+			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+			SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+			System.out.println("Hibernate Configuration loaded");	
+			// opens a new session from the session factory
+			Session session = sessionFactory.openSession();
+			org.hibernate.Transaction t =  session.beginTransaction();
+            Customer customer = null;
 
+						//Fetching based on email/customerID
+						String hql = "FROM Customer c WHERE c.email = :identifier";
+						Query	query = session.createQuery(hql);
+							query.setParameter("identifier",email);
+							List results = query.list();
+							 if(results == null || results.isEmpty())
+							 {
+								 return customer;
+							 }
+				 customer = (Customer)results.get(0);
+							
+
+			session.flush(); // stmt.executeBatch()
+			t.commit(); // con.commit();
+			System.out.println("Records fetched");
+			return customer;
+
+		}catch (Throwable ex) {
+			// Make sure you log the exception, as it might be swallowed
+			System.err.println("Initial SessionFactory creation failed." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
+	
 	public Customer fetchCustomer(String identifier){
 		try
 		{
@@ -72,6 +108,7 @@ public class CustomerDAO {
 			// opens a new session from the session factory
 			Session session = sessionFactory.openSession();
 			org.hibernate.Transaction t =  session.beginTransaction();
+			Customer customer = null;
 			String hql = "";
 			Query query ;
 			//Fetching based on email/customerID
@@ -89,9 +126,13 @@ public class CustomerDAO {
 				query.setParameter("identifier",id);
 
 			}
-
+  
 			List results = query.list();
-			Customer customer = (Customer)results.get(0);
+			if(results == null || results.isEmpty())
+			 {
+				 return customer;
+			 }
+			customer = (Customer)results.get(0);
 
 			session.flush(); // stmt.executeBatch()
 			t.commit(); // con.commit();
@@ -115,11 +156,12 @@ public class CustomerDAO {
 			// opens a new session from the session factory
 			Session session = sessionFactory.openSession();
 			org.hibernate.Transaction t =  session.beginTransaction();
+			Set<Customer> customers = new HashSet<Customer>();;
 			String hql = "FROM Customer c";
 				Query query = session.createQuery(hql);
 
 			List results = query.list();
-			Set<Customer> customers = new HashSet<Customer>();
+		
 			for(Object result : results)
 			{
 				Customer customer = new Customer(); 

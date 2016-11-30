@@ -48,19 +48,24 @@ public class OrderResource implements OrderService {
 		OrderActivity ordActivity = new OrderActivity();
 		return ordActivity.addOrder(orderRequest.getOrderDate(),orderRequest.getTotalPrice(), orderRequest.getProductOrder(),orderRequest.getCustomerEmail());
 	}
-	@DELETE
+
+
+	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/{orderId}")
-	public Response deleteOrder(@PathParam("orderId") String id) {
-		System.out.println("Delete METHOD Request from Client with orderID String ............." + id);
+	@Path("/order/cacel/{orderId}")
+	public String cancelOrder(@PathParam("orderId") String id) {
 		OrderActivity ordActivity = new OrderActivity();
-		String res = ordActivity.deleteOrder(id);
-		if (res.equals("OK")) {
-			return Response.status(Status.OK).build();
-		}
-		return null;
+		return ordActivity.cancelOrder(id);
+	
 	}
 
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/status/{orderId}")
+	public String fetchOrderStatus(@PathParam("orderId") String id) {
+		OrderActivity ordActivity = new OrderActivity();
+		return ordActivity.fetchOrderStatus(id);
 	
+	}
 	
 }

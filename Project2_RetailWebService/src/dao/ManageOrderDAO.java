@@ -86,9 +86,14 @@ throw new ExceptionInInitializerError(ex);
 				query.setParameter("identifier",idInt);
 
 		
+				Order order = null; 
 
-			List results = query.list();
-			Order order = (Order)results.get(0);
+				List results = query.list();
+				if(results == null || results.isEmpty())
+				 {
+					 return order;
+				 }
+			 order = (Order)results.get(0);
 
 			session.flush(); // stmt.executeBatch()
 			t.commit(); // con.commit();
@@ -136,5 +141,79 @@ throw new ExceptionInInitializerError(ex);
 			throw new ExceptionInInitializerError(ex);
 		}
 	}	
+	public String cancelOrder(String id)
+	{
+		try
+		{
+			dbConnection();
+			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+			SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+			System.out.println("Hibernate Configuration loaded");	
+			// opens a new session from the session factory
+			Session session = sessionFactory.openSession();
+			org.hibernate.Transaction t =  session.beginTransaction();
+
+			String hql = "update  Order o set o.orderStatus= :status WHERE o.orderID = :identifier";
+				Query query = session.createQuery(hql);
+				int idInt = Integer.parseInt(id);
+				query.setParameter("status","Cancelled");
+				query.setParameter("identifier",idInt);
+				
+				int result = query.executeUpdate();
+				System.out.println("Rows affected: " + result);
+
+			session.flush(); // stmt.executeBatch()
+			t.commit(); // con.commit();
+			System.out.println("Records updated to cancel");
+			String status = "Order with OrderId:"+ " " + id + " is cancelled";
+			return  status;  
+
+		}catch (Throwable ex) {
+			// Make sure you log the exception, as it might be swallowed
+			System.err.println("Initial SessionFactory creation failed." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
 	
+	public String fetchOrderStatus(String id)
+	{
+		try
+		{
+			dbConnection();
+			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+			SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+			System.out.println("Hibernate Configuration loaded");	
+			// opens a new session from the session factory
+			Session session = sessionFactory.openSession();
+			org.hibernate.Transaction t =  session.beginTransaction();
+
+			String hql = "FROM Order o WHERE o.orderID = :identifier";
+				Query query = session.createQuery(hql);
+				int idInt = Integer.parseInt(id);
+				query.setParameter("identifier",idInt);
+				
+
+				Order order = null; 
+
+				List results = query.list();
+				if(results == null || results.isEmpty())
+				 {
+					 return "Incorrect OrderId";
+				 }
+				
+			 order = (Order)results.get(0);
+
+
+			session.flush(); // stmt.executeBatch()
+			t.commit(); // con.commit();
+			System.out.println("Records updated to cancel");
+			String status = order.getOrderStatus();
+			return  status;  
+
+		}catch (Throwable ex) {
+			// Make sure you log the exception, as it might be swallowed
+			System.err.println("Initial SessionFactory creation failed." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
 }

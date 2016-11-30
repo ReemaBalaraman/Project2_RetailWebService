@@ -47,7 +47,7 @@ public class CustomerResource implements CustomerService {
 	public String addCustomer(CustomerRequest  customerRequest) {
 		//System.out.println("POST METHOD Request from Client with ............." + employeeRequest.getFirstName() + "  " + employeeRequest.getLastName());
 		CustomerActivity custActivity = new CustomerActivity();
-		return custActivity.addCustomer(customerRequest.getCustomerName(),customerRequest.getEmail(),customerRequest.getCustomerPhone(),customerRequest.getCustomerAddress());
+		return custActivity.addCustomer(customerRequest.getCustomerName(),customerRequest.getEmail(),customerRequest.getPassword(),customerRequest.getCustomerPhone(),customerRequest.getCustomerAddress());
 	}
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
@@ -60,6 +60,15 @@ public class CustomerResource implements CustomerService {
 			return Response.status(Status.OK).build();
 		}
 		return null;
+	}
+
+	@POST
+	@Produces({"application/xml" , "application/json"})
+	@Path("/customer/auth")
+	public String authenticateCustomer(CustomerRequest  customerRequest) {
+		CustomerActivity custActivity = new CustomerActivity();
+		return	custActivity.authenticateCustomer(customerRequest.getEmail(), customerRequest.getPassword());
+
 	}
 	
 }

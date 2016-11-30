@@ -37,6 +37,8 @@ public class Customer {
 	private CustomerPhone customerPhone;
 	@Column(name="email")
 	private String email;
+	@Column(name="password",length=25, nullable=false)
+	private String password;
 	@OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="customerID")
     private Set<Order> order;
@@ -48,13 +50,14 @@ public class Customer {
 	
 
 	public Customer(int customerID, String customerName,
-			CustomerAddress customerAddress, CustomerPhone customerPhone, String email) {
+			CustomerAddress customerAddress, CustomerPhone customerPhone, String email,String password) {
 		super();
 		this.customerID = customerID;
 		this.customerName = customerName;
 		this.customerAddress = customerAddress;
 		this.customerPhone = customerPhone;
 		this.email = email;
+		this.password = password;
 
 	}
 	public String getCustomerName() {
@@ -105,6 +108,16 @@ public class Customer {
 	
 	public String getEmail() {
 		return email;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	
