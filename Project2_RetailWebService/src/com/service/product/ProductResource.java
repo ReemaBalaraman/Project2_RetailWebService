@@ -11,10 +11,15 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.UriInfo;
 
+import model.order.ProductOrder;
+
+import com.service.representation.order.OrderRequest;
 import com.service.representation.product.ProductRepresentation;
 import com.service.representation.product.ProductRequest;
 import com.service.workflow.product.ProductActivity;
@@ -34,12 +39,17 @@ public class ProductResource implements ProductService {
 	}
 	
 	@GET
-	@Produces({"application/xml" , "application/json"})
+	@Produces({"application/json"})
 	@Path("/product/{productId}")
-	public ProductRepresentation getProduct(@PathParam("productId") String id) {
+	public ProductRepresentation getProduct(@PathParam("productId") String id,@Context UriInfo uriInfo) {
 		System.out.println("GET METHOD Request from Client with productId String ............." + id);
 		ProductActivity proActivity = new ProductActivity();
-		return proActivity.getProduct(id);
+		ProductRepresentation prdRep = proActivity.getProduct(id);
+		/*Adding links*/
+		prdRep.addLink(getUriForSelf(uriInfo,prdRep), "self", "Get", "application/json");
+		prdRep.addLink(getUriForBuy(uriInfo,prdRep),"buy", "POST", "application/json");
+		prdRep.addLink(getUriForDelete(uriInfo,prdRep), "delete", "Delete", "application/json");
+		return prdRep;
 	}
 	
 	@POST
@@ -64,12 +74,46 @@ public class ProductResource implements ProductService {
 	}
 	
 	@POST
-	@Produces({"application/xml" , "application/json"})
+	@Produces({"application/json"})
 	@Path("/product/buy")
-	public void buyProduct(String email,Date orderDate,Map<String,Integer> productQuantity)
+	public String buyProduct(OrderRequest  orderRequest)
 	{
 		ProductActivity proActivity = new ProductActivity();
-		proActivity.buyProduct(email, orderDate, productQuantity);
+		return proActivity.buyProduct(orderRequest.getCustomerEmail(), orderRequest.getOrderDate(), orderRequest.getProductOrder());
+	}
+	
+	/*Method to generate link for itself*/
+	private String getUriForSelf(UriInfo uriInfo,ProductRepresentation prdRep){
+		String url = uriInfo.getBaseUriBuilder()
+							.path(ProductResource.class)
+							.path("product")
+							.path(Integer.toString(prdRep.getProductID()))
+							.build()
+							.toString();
+		return url;
+		
+	}
+	/*Method to generate link to Buy product*/
+	private String getUriForBuy(UriInfo uriInfo,ProductRepresentation prdRep){
+		String url = uriInfo.getBaseUriBuilder()
+							.path(ProductResource.class)
+							.path("product")
+							.path("buy")
+							.build()
+							.toString();
+		return url;
+		
+	}
+	/*Method to generate link to Delete product*/
+	private String getUriForDelete(UriInfo uriInfo,ProductRepresentation prdRep){
+		String url = uriInfo.getBaseUriBuilder()
+							.path(ProductResource.class)
+							.path("product")
+							.path(Integer.toString(prdRep.getProductID()))
+							.build()
+							.toString();
+		return url;
+		
 	}
 	
 }

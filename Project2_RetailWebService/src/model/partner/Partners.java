@@ -13,7 +13,7 @@ import org.hibernate.annotations.Proxy;
 import model.product.Product;
 
 @Entity
-@Table(name="Partners", 
+@Table(name="partners", 
 uniqueConstraints={ @UniqueConstraint(columnNames={"partnerID"})})
 @Proxy(lazy=false)
 public class Partners {

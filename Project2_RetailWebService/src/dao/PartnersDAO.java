@@ -77,7 +77,7 @@ throw new ExceptionInInitializerError(ex);
 			// opens a new session from the session factory
 			Session session = sessionFactory.openSession();
 			org.hibernate.Transaction t =  session.beginTransaction();
-			String hql = "FROM partners p";
+			String hql = "FROM Partners p";
 				Query query = session.createQuery(hql);
 
 			List results = query.list();
@@ -112,7 +112,7 @@ throw new ExceptionInInitializerError(ex);
 			// opens a new session from the session factory
 			Session session = sessionFactory.openSession();
 			org.hibernate.Transaction t =  session.beginTransaction();
-			String hql = "FROM Partner p WHERE p.partnerID = :identifier";
+			String hql = "FROM Partners p WHERE p.partnerID = :identifier";
 				Query query = session.createQuery(hql);
 				query.setParameter("identifier",Integer.parseInt(id));
 			

@@ -9,11 +9,15 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.CacheControl;
 
 
+import com.service.order.OrderResource;
+import com.service.representation.order.OrderRepresentation;
 import com.service.representation.partner.PartnerRepresentation;
 import com.service.representation.partner.PartnerRequest;
 import com.service.workflow.partner.PartnerActivity;
@@ -35,10 +39,15 @@ public class PartnerResource implements PartnerService {
  @GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partner/{partnerId}")
-	public PartnerRepresentation getPartner(@PathParam("partnerId") String id) {
+	public PartnerRepresentation getPartner(@PathParam("partnerId") String id,@Context UriInfo uriInfo) {
 		System.out.println("GET METHOD Request from Client with partnerId String ............." + id);
 		PartnerActivity partActivity = new PartnerActivity();
-		return partActivity.getPartner(id);
+		PartnerRepresentation partRep = partActivity.getPartner(id);
+		/*Adding links*/
+		partRep.addLink(getUriForSelf(uriInfo,partRep), "self", "Get", "application/json");
+		partRep.addLink(getUriForAdd(uriInfo,partRep), "add", "POST", "application/json");
+		partRep.addLink(getUriForDelete(uriInfo,partRep), "delete", "DELETE", "application/json");
+		return partRep;
 	} 
 	
 	@POST
@@ -62,11 +71,35 @@ public class PartnerResource implements PartnerService {
 		return null;
 	}
 
-	@Override
-	public PartnerRepresentation getPartner(int employeeId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	
+	/*Method to generate link for itself*/
+	private String getUriForSelf(UriInfo uriInfo,PartnerRepresentation prdRep){
+		String url = uriInfo.getBaseUriBuilder()
+							.path(OrderResource.class)
+							.path("partner")
+							.path(Integer.toString(prdRep.getPartnerID()))
+							.build()
+							.toString();
+		return url;
+		
+	}	
+	 /*Method to generate link to add partner*/
+		private String getUriForAdd(UriInfo uriInfo, PartnerRepresentation partRep) {
+			 String url = uriInfo.getBaseUriBuilder()
+						.path(PartnerResource.class)
+						.path("partner")
+						.build()
+						.toString();
+		return url;
+		}
+		/*Method to generate link to delete partner*/
+		private String getUriForDelete(UriInfo uriInfo, PartnerRepresentation partRep) {
+			 String url = uriInfo.getBaseUriBuilder()
+						.path(PartnerResource.class)
+						.path("partner")
+						.path(Integer.toString(partRep.getPartnerID()))
+						.build()
+						.toString();
+			 return url;
+		}
 }

@@ -48,17 +48,17 @@ public class ProductManager {
 	}
 	
 	 /* Adding Products to cart*/
-		public void buyProduct(String email,Date orderDate,Map<String,Integer> productQuantity){
+		public String buyProduct(String email,Date orderDate,Set<ProductOrder> productQuantity){
 			Product product = new Product();
 			OrderManager om = new OrderManager();
 			 double totalPrice = 0.0;
 			 Set<ProductOrder>  productEligible = new HashSet<ProductOrder>();
 			 ProductOrder productOrder ;
 			//looping through product to check availability and calculate total price
-	          for(Map.Entry<String, Integer> entry : productQuantity.entrySet())
+	          for(ProductOrder prodOrder : productQuantity)
 	          {
-	        	product = serachProduct(entry.getKey());
-	        	int orderQuantity = entry.getValue();
+	        	product = serachProduct(Integer.toString(prodOrder.getProduct().getProductID()));
+	        	int orderQuantity = prodOrder.getOrderQuantity();
 			if(product.getAvailableQuantity() >= orderQuantity){
 				//adding eligible products
 				productOrder = new ProductOrder();
@@ -72,7 +72,13 @@ public class ProductManager {
 	          }
 		        //Palce order
 	        //  Date orderDate, double totalPrice, Set<ProductOrder> productOrder,String customerEmail
-		        om.orderPlacement(orderDate,totalPrice,  productEligible,email);
+		       return  om.orderPlacement(orderDate,totalPrice,  productEligible,email);
 		}
+		public String deleteProduct(String productID)
+		{
+			// Searching Product from DB based on ProductID
+			String status = prodDAO.deleteProduct(productID);
+			return status;
 
+		}
 }

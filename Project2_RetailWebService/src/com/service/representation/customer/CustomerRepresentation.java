@@ -1,9 +1,14 @@
 package com.service.representation.customer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.domain.model.Link;
 
 import model.customer.CustomerAddress;
 import model.customer.CustomerPhone;
@@ -19,6 +24,7 @@ public class CustomerRepresentation {
 	private CustomerPhone customerPhone;
 	private String email;
 	private String password;
+	private List<Link> links = new ArrayList<>();
 	public int getCustomerID() {
 		return customerID;
 	}
@@ -54,6 +60,14 @@ public class CustomerRepresentation {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public void addLink(String url, String rel, String method, String mediaType){
+		Link link = new Link();
+		link.setUrl(url);
+		link.setRel(rel);
+		link.setAction(method);
+		link.setMediaType(mediaType);
+		links.add(link);
 	}
 
 }

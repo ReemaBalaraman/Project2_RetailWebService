@@ -59,7 +59,7 @@ public class CustomerManager {
         {
         if(password.equals(customer.getPassword()))
         {
-        	return "Succefully logged in.";
+        	return "Succefully logged in."+customer.getCustomerID();
         }
         else
         	return "Email and Password conbination does not match.Please provide the details again.";

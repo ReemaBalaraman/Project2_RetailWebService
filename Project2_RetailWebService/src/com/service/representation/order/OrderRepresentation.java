@@ -1,12 +1,16 @@
 package com.service.representation.order;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.domain.model.Link;
 
 import model.customer.Customer;
 import model.order.ProductOrder;
@@ -22,6 +26,7 @@ public class OrderRepresentation {
 	private Date orderDate;
 	private double totalPrice;
 	private Set<ProductOrder> productOrder;
+	private List<Link> links = new ArrayList<>();
 	private Customer customer;
 	public int getOrderID() {
 		return orderID;
@@ -60,6 +65,13 @@ public class OrderRepresentation {
 		this.customer = customer;
 	}
 	
-	
+	public void addLink(String url, String rel, String method, String mediaType){
+		Link link = new Link();
+		link.setUrl(url);
+		link.setRel(rel);
+		link.setAction(method);
+		link.setMediaType(mediaType);
+		links.add(link);
+	}	
 	
 }

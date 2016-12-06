@@ -124,5 +124,35 @@ public class ProductDAO {
 			throw new ExceptionInInitializerError(ex);
 		}
 	}	
-	
+	public String deleteProduct(String id ){
+		try
+		{
+			dbConnection();
+			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+			SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+			System.out.println("Hibernate Configuration loaded");	
+			// opens a new session from the session factory
+			Session session = sessionFactory.openSession();
+			org.hibernate.Transaction t =  session.beginTransaction();
+
+			String hql = "delete from Product where productID= :productID";
+			Query query = session.createQuery(hql);
+			int idInt = Integer.parseInt(id);
+			query.setParameter("productID",idInt);
+			
+			int result = query.executeUpdate();
+			System.out.println("Rows affected: " + result);
+
+		session.flush(); // stmt.executeBatch()
+		t.commit(); // con.commit();
+		System.out.println("Records updated to cancel");
+		String status = "OK";
+		return  status;
+
+		}catch (Throwable ex) {
+			// Make sure you log the exception, as it might be swallowed
+			System.err.println("Initial SessionFactory creation failed." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}	
 }

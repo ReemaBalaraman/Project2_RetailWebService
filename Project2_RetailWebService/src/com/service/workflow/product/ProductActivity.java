@@ -74,15 +74,14 @@ public class ProductActivity {
 
 	public String deleteProduct(String id) {
 
-		//dao.deleteEmployee(id);
-		//em.deleteEmployee(id);
+		String status = pm.deleteProduct(id);
 
-		return "OK";
+		return status;
 	}
 
-	public void buyProduct(String email,Date orderDate,Map<String,Integer> productQuantity){
+	public String buyProduct(String email,Date orderDate,Set<ProductOrder> productQuantity){
 
-		pm.buyProduct(email, orderDate, productQuantity);
+		return pm.buyProduct(email, orderDate, productQuantity);
 
 
 
